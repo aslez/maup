@@ -1,9 +1,15 @@
 Package: maup
-Title: What the package does (one line)
+Date: 2014-11-12
+Title: Autocorrelated surfaces and random zoning systems
 Version: 0.1
-Authors@R: "First Last <first.last@example.com> [aut, cre]"
-Description: What the package does (one paragraph)
+Authors@R: person("Adam", "Slez", email = "aslez@virginia.edu",
+    role = c("aut", "cre"))
+Description: This package provides basic tools for replicating the analyses
+    contained in Openshaw (1984).
 Depends:
     R (>= 3.1.1)
-License: What license is it under?
+License: MIT + file LICENSE
 LazyData: true
+Imports:
+    raster,
+    rgeos
