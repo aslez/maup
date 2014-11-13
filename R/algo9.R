@@ -24,19 +24,20 @@
 algo9 <- function(x, mori, old_r, tol = 1 / 1e2, maxIter = 1e4,
                   print_out = TRUE) {
   if (class(x) == 'numeric') {
-    old_r <- raster(matrix(rnorm(x[1] * x[2]), nrow = x[1], ncol = x[2]))
+    rmat <- matrix(rnorm(x[1] * x[2]), nrow = x[1], ncol = x[2])
+    old_r <- raster::raster(rmat)
   }
   else old_r <- x
   iter <- 1
-  n <- ncell(old_r)
-  if (any(is.na(values(old_r)))) old_r[] <- runif(n,-2,2)
-  old.moran <- Moran(old_r)
+  n <- raster::ncell(old_r)
+  if (any(is.na(raster::values(old_r)))) old_r[] <- runif(n,-2,2)
+  old.moran <- raster::Moran(old_r)
   if (old.moran > mori - tol) stop('Bad start.  Try again.')
   while (abs(mori - old.moran) > tol & iter <= maxIter) {
     swap <- sample(n, 2)
     new.r <- old_r
     new.r[rev(swap)] <- old_r[swap]
-    new.moran <- Moran(new.r)
+    new.moran <- raster::Moran(new.r)
     if(new.moran > old.moran & new.moran < mori) {
       old.moran <- new.moran
       old_r <- new.r

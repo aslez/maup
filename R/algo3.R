@@ -23,17 +23,17 @@
 
 algo3 <- function(x, m, ras = FALSE){
   if (class(x) == 'numeric') {
-    r <- raster(matrix(0, nrow = x[1], ncol = x[2]))
+    r <- raster::raster(matrix(0, nrow = x[1], ncol = x[2]))
   }
   else r <- x
-  n <- ncell(r)
-  adj <- adjacent(r, 1:n, 4)
+  n <- raster::ncell(r)
+  adj <- raster::adjacent(r, 1:n, 4)
   w <- matrix(0, n, n)
   for(i in 1:nrow(adj)){
     w[adj[i, 1], adj[i, 2]] <- 1
   }
   alloc <- rep(NA, n)
-  alloc[which(values(is.na(r)))] <- 0
+  alloc[which(raster::values(is.na(r)))] <- 0
   core.zones <- sample(which(is.na(alloc)), m)
   active.zones <- rep(TRUE, m)
   alloc[core.zones] <- which(active.zones)
@@ -53,7 +53,10 @@ algo3 <- function(x, m, ras = FALSE){
   }
   r[] <- alloc
   result <- r
-  if(!ras) result <- rasterToPolygons(r, dissolve = TRUE)
+  if(!ras) {
+    sp_shp <- raster::rasterToPolygons(r)
+    result <- rgeos::gUnionCascaded(sp_shp, id = sp_shp@data$layer)
+  }
   result
 }
 

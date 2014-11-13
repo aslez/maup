@@ -3,8 +3,7 @@
 \alias{algo9}
 \title{Generate autocorrelated data.}
 \usage{
-algo9(targI, old.r, tol = 1/ncell(old.r), maxIter = 10 * targI *
-  ncell(old.r), print.out = TRUE)
+algo9(x, mori, old_r, tol = 1/100, maxIter = 10000, print_out = TRUE)
 }
 \arguments{
 \item{x}{an object of class \code{Raster} or a numeric vector depicting the
@@ -12,6 +11,9 @@ dimensions of a new raster.}
 
 \item{mori}{a numeric scalar indicating the desired degree of
 autocorrelation.  Autocorrelation is measured using Moran's I.}
+
+\item{print_out}{logical indicating whether or not to print the iteration
+number.  The default is \code{TRUE}.}
 }
 \value{
 \code{algo9} returns a \code{Raster} class object representing
