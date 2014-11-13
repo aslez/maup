@@ -7,9 +7,9 @@ Authors@R: person("Adam", "Slez", email = "aslez@virginia.edu",
 Description: This package provides basic tools for replicating the analyses
     contained in Openshaw (1984).
 Depends:
-    R (>= 3.1.1)
-License: MIT + file LICENSE
-LazyData: true
-Depends:
     raster,
     rgeos
+License: MIT + file LICENSE
+LazyData: true
+Suggests:
+    testthat

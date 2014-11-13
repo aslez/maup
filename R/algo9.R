@@ -7,6 +7,8 @@
 #' dimensions of a new raster.
 #' @param mori a numeric scalar indicating the desired degree of
 #' autocorrelation.  Autocorrelation is measured using Moran's I.
+#' @param tol numeric indicating tolerance for convergence.
+#' @param maxIter numeric indicating the maximum number of observations.
 #' @param print_out logical indicating whether or not to print the iteration
 #' number.  The default is \code{TRUE}.
 #'
@@ -21,8 +23,7 @@
 #'
 #' @examples algo9(x = c(50, 50), mori = .3)
 
-algo9 <- function(x, mori, old_r, tol = 1 / 1e2, maxIter = 1e4,
-                  print_out = TRUE) {
+algo9 <- function(x, mori, tol = 1 / 1e2, maxIter = 1e4, print_out = TRUE) {
   if (class(x) == 'numeric') {
     rmat <- matrix(rnorm(x[1] * x[2]), nrow = x[1], ncol = x[2])
     old_r <- raster::raster(rmat)
