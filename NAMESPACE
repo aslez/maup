@@ -1,2 +1,4 @@
 exportPattern("^[^\\.]")
+importFrom(rgeos, "dissolve")
 import(raster)
+
