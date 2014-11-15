@@ -38,7 +38,9 @@ rezone <- function(x, rz_df, ras = FALSE){
   })
   rzz <- raster::overlay(stack(rzz_lst_ud),
                          fun = function(x) sum(x, na.rm = TRUE))
-  result <- rzz
+  result <- reclassify(rzz,
+                       data.frame(unique(getValues(rzz)),
+                                  rank(unique(getValues(rzz)))))
   if(!ras) {
     sp_shp <- raster::rasterToPolygons(rzz)
     result <- rgeos::gUnionCascaded(sp_shp, id = sp_shp@data$layer)
