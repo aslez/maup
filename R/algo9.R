@@ -1,4 +1,4 @@
-#' Generate autocorrelated data.
+#' Generate autocorrelated data
 #'
 #' \code{algo9} generates a valued raster with a specified degree of
 #' autocorrelation.

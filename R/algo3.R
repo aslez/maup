@@ -1,4 +1,4 @@
-#' Generate random zones.
+#' Generate random zones
 #'
 #' \code{algo3} generates a random zoning system.  Zones can be output in either
 #' raster or vector format.
