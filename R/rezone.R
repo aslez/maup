@@ -34,9 +34,10 @@ rezone <- function(x, rz_df, ras = FALSE){
   })
   rzz_lst_ud <- lapply(seq_along(rzz_lst), function(z) {
     rzz_lst[[z]][rzz_lst[[z]] == 0] <- NA
-    10^nchar(ncell(rzz_lst[[z]])) * m_df[z, 1] + rzz_lst[[z]]
+    10^nchar(raster::ncell(rzz_lst[[z]])) * m_df[z, 1] + rzz_lst[[z]]
   })
-  rzz <- overlay(stack(rzz_lst_ud), fun = function(x) sum(x, na.rm = TRUE))
+  rzz <- raster::overlay(stack(rzz_lst_ud),
+                         fun = function(x) sum(x, na.rm = TRUE))
   result <- rzz
   if(!ras) {
     sp_shp <- raster::rasterToPolygons(rzz)

@@ -3,35 +3,31 @@
 \alias{rezone}
 \title{Rezone existing data}
 \usage{
-rezone(x, mori, tol = 1/100, maxIter = 10000, print_out = TRUE)
+rezone(x, rz_df, ras = FALSE)
 }
 \arguments{
 \item{x}{an object of class \code{Raster}.}
 
-\item{rc_mat}{a reclassification matrix to passed \link{Reclassify}.}
+\item{rz_df}{a three-column data frame.  The firs two columns are used to
+assign zones to regions by passing values to \code{Reclassify}.  The third
+column indicates the number of zones to generate in each rezoning region.}
 
 \item{ras}{logical indicating whether output should be in raster or vector
 format.  The default is \code{FALSE}.}
 }
 \value{
-\code{algo3} returns either a \code{Raster} or
-\code{SpatialPolygons} class object representing a set of randomly generated
-zones.
+\code{rezone} returns either a \code{Raster} or
+\code{SpatialPolygons} class object representing a new set of randomly
+generated zones reflecting the constraints placed on the rezoning process.
 }
 \description{
 \code{rezone} randomly rezones an existing zoning system, allowing for
 user-defined constraints.  Zones can be output in either raster or vector
 format.
 }
-\details{
-Implements the algorithm outlined by Openshaw (1977).
-}
 \examples{
-algo3(x = c(50, 50))
-}
-\references{
-Openshaw, Stan.  1977.  "Algorithm 3: a procedure to
-generate pseudo-random aggregations of N zones into M regions, where M is
-less than N."  Environment and Planning A 9: 1423-1428.
+r <- algo3(x = c(20, 20), m = 5, ras = TRUE)
+rz_vals <- data.frame(1:6, 1:6, c(2, 1, 1, 1, 1, 1))
+rezone(x = r, rz_df = rz_vals, ras = TRUE)
 }
 
