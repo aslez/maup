@@ -15,9 +15,9 @@
 #' \code{SpatialPolygons} class object representing a new set of randomly
 #' generated zones reflecting the constraints placed on the rezoning process.
 #'
-#' @examples r <- algo3(x = c(20, 20), m = 6, ras = TRUE)
-#' rz_vals <- data.frame(1:6, XXXX, )
-#' rezone(x = r, rz_df = rz_vals, m_vec = m_vals, ras = TRUE)
+#' @examples r <- algo3(x = c(20, 20), m = 5, ras = TRUE)
+#' rz_vals <- data.frame(1:6, 1:6, c(2, 1, 1, 1, 1, 1))
+#' rezone(x = r, rz_df = rz_vals, ras = TRUE)
 
 rezone <- function(x, rz_df, ras = FALSE){
   rzr <- raster::reclassify(x, rz_df[, 1:2])
